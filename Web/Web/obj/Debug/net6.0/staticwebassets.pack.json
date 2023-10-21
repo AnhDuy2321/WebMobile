@@ -3357,6 +3357,10 @@
       "PackagePath": "staticwebassets\\assets\\images\\header\\icon\\separator.png"
     },
     {
+      "Id": "D:\\Đồ án ngành\\Web\\Web\\wwwroot\\assets\\images\\logo\\1.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\logo\\1.jpg"
+    },
+    {
       "Id": "D:\\Đồ án ngành\\Web\\Web\\wwwroot\\assets\\images\\logo\\dark.png",
       "PackagePath": "staticwebassets\\assets\\images\\logo\\dark.png"
     },
@@ -3505,6 +3509,10 @@
       "PackagePath": "staticwebassets\\assets\\images\\slider\\bg\\1-1.jpg"
     },
     {
+      "Id": "D:\\Đồ án ngành\\Web\\Web\\wwwroot\\assets\\images\\slider\\bg\\1.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\slider\\bg\\1.jpg"
+    },
+    {
       "Id": "D:\\Đồ án ngành\\Web\\Web\\wwwroot\\assets\\images\\slider\\bg\\2-1.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\slider\\bg\\2-1.jpg"
     },
@@ -3525,8 +3533,32 @@
       "PackagePath": "staticwebassets\\assets\\images\\slider\\inner-img\\1-3-601x534.png"
     },
     {
+      "Id": "D:\\Đồ án ngành\\Web\\Web\\wwwroot\\assets\\images\\slider\\inner-img\\1.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\slider\\inner-img\\1.jpg"
+    },
+    {
       "Id": "D:\\Đồ án ngành\\Web\\Web\\wwwroot\\assets\\images\\slider\\inner-img\\2-1-601x426.png",
       "PackagePath": "staticwebassets\\assets\\images\\slider\\inner-img\\2-1-601x426.png"
+    },
+    {
+      "Id": "D:\\Đồ án ngành\\Web\\Web\\wwwroot\\assets\\images\\slider\\inner-img\\2.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\slider\\inner-img\\2.jpg"
+    },
+    {
+      "Id": "D:\\Đồ án ngành\\Web\\Web\\wwwroot\\assets\\images\\slider\\inner-img\\3.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\slider\\inner-img\\3.jpg"
+    },
+    {
+      "Id": "D:\\Đồ án ngành\\Web\\Web\\wwwroot\\assets\\images\\slider\\inner-img\\4.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\slider\\inner-img\\4.jpg"
+    },
+    {
+      "Id": "D:\\Đồ án ngành\\Web\\Web\\wwwroot\\assets\\images\\slider\\inner-img\\5.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\slider\\inner-img\\5.jpg"
+    },
+    {
+      "Id": "D:\\Đồ án ngành\\Web\\Web\\wwwroot\\assets\\images\\slider\\inner-img\\6.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\slider\\inner-img\\6.jpg"
     },
     {
       "Id": "D:\\Đồ án ngành\\Web\\Web\\wwwroot\\assets\\images\\testimonial\\user\\1.png",
@@ -4103,6 +4135,10 @@
     {
       "Id": "D:\\Đồ án ngành\\Web\\Web\\wwwroot\\images\\sanpham\\dt.png",
       "PackagePath": "staticwebassets\\images\\sanpham\\dt.png"
+    },
+    {
+      "Id": "D:\\Đồ án ngành\\Web\\Web\\wwwroot\\images\\sanpham\\duy.jpg",
+      "PackagePath": "staticwebassets\\images\\sanpham\\duy.jpg"
     },
     {
       "Id": "D:\\Đồ án ngành\\Web\\Web\\wwwroot\\images\\sanpham\\samsung.png",

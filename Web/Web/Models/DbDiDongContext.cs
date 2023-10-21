@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Web.ModelViews;
 
 namespace Web.Models;
 
@@ -35,9 +34,8 @@ public partial class DbDiDongContext : DbContext
     public virtual DbSet<VaiTro> VaiTros { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseSqlServer("Data Source=ADMIN\\ADUY;Initial Catalog=DB_DiDong;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
-    }
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Data Source=ADMIN\\ADUY;Initial Catalog=DB_DiDong;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -47,18 +45,20 @@ public partial class DbDiDongContext : DbContext
 
             entity.ToTable("ChiTietHoaDon");
 
-            entity.Property(e => e.MaCthd)
-                .ValueGeneratedNever()
-                .HasColumnName("MaCTHD");
+            entity.Property(e => e.MaCthd).HasColumnName("MaCTHD");
+            entity.Property(e => e.DonGia).HasColumnType("decimal(18, 0)");
             entity.Property(e => e.MaHd).HasColumnName("MaHD");
             entity.Property(e => e.MaSp).HasColumnName("MaSP");
+            entity.Property(e => e.ThanhTien).HasColumnType("decimal(18, 0)");
 
             entity.HasOne(d => d.MaHdNavigation).WithMany(p => p.ChiTietHoaDons)
                 .HasForeignKey(d => d.MaHd)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ChiTietHoaDon_HoaDon");
 
             entity.HasOne(d => d.MaSpNavigation).WithMany(p => p.ChiTietHoaDons)
                 .HasForeignKey(d => d.MaSp)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ChiTietHoaDon_SanPham");
         });
 
@@ -68,14 +68,14 @@ public partial class DbDiDongContext : DbContext
 
             entity.ToTable("HoaDon");
 
-            entity.Property(e => e.MaHd)
-                .ValueGeneratedNever()
-                .HasColumnName("MaHD");
+            entity.Property(e => e.MaHd).HasColumnName("MaHD");
             entity.Property(e => e.MaKh).HasColumnName("MaKH");
             entity.Property(e => e.NgayLap).HasColumnType("datetime");
+            entity.Property(e => e.Tong).HasColumnType("decimal(18, 0)");
 
             entity.HasOne(d => d.MaKhNavigation).WithMany(p => p.HoaDons)
                 .HasForeignKey(d => d.MaKh)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_HoaDon_KhachHang");
         });
 
@@ -85,13 +85,9 @@ public partial class DbDiDongContext : DbContext
 
             entity.ToTable("KhachHang");
 
-            entity.Property(e => e.MaKh)
-                .ValueGeneratedNever()
-                .HasColumnName("MaKH");
+            entity.Property(e => e.MaKh).HasColumnName("MaKH");
             entity.Property(e => e.DiaChi).HasMaxLength(50);
-            entity.Property(e => e.Email)
-                .HasMaxLength(10)
-                .IsFixedLength();
+            entity.Property(e => e.Email).HasMaxLength(50);
             entity.Property(e => e.MatKhau).HasMaxLength(50);
             entity.Property(e => e.NgaySinh).HasColumnType("datetime");
             entity.Property(e => e.Salt)
@@ -152,8 +148,8 @@ public partial class DbDiDongContext : DbContext
             entity.Property(e => e.MaSp)
                 .ValueGeneratedNever()
                 .HasColumnName("MaSP");
+            entity.Property(e => e.Gia).HasColumnType("decimal(18, 0)");
             entity.Property(e => e.MaNsx).HasColumnName("MaNSX");
-            entity.Property(e => e.MoTa).HasMaxLength(50);
             entity.Property(e => e.TenSp)
                 .HasMaxLength(50)
                 .HasColumnName("TenSP");
@@ -209,8 +205,4 @@ public partial class DbDiDongContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-
-    public DbSet<Web.ModelViews.RegisterViewModel>? RegisterViewModel { get; set; }
-
-    public DbSet<Web.ModelViews.LoginViewModel>? LoginViewModel { get; set; }
 }

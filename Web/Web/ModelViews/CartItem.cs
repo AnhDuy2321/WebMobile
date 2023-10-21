@@ -1,4 +1,5 @@
-﻿using Web.Models;
+﻿using System;
+using Web.Models;
 
 namespace Web.ModelViews
 {
@@ -6,6 +7,6 @@ namespace Web.ModelViews
     {
         public SanPham sanpham { get; set; }
         public int amount { get; set; }
-        public double TotalMoney => amount * sanpham.Gia.Value;
+        public decimal? TotalMoney => amount * sanpham.Gia.Value;
     }
 }

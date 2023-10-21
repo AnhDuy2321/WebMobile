@@ -9,11 +9,11 @@ public partial class HoaDon
 
     public DateTime? NgayLap { get; set; }
 
-    public int? Tong { get; set; }
+    public decimal? Tong { get; set; }
 
-    public int? MaKh { get; set; }
+    public int MaKh { get; set; }
 
     public virtual ICollection<ChiTietHoaDon> ChiTietHoaDons { get; set; } = new List<ChiTietHoaDon>();
 
-    public virtual KhachHang? MaKhNavigation { get; set; }
+    public virtual KhachHang MaKhNavigation { get; set; } = null!;
 }

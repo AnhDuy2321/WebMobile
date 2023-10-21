@@ -38,17 +38,17 @@
                                 </div>
                                 <div class="swiper-slide">
                                     <a href="~/assets/images/product/large-size/2-2-555x645.jpg" class="single-img gallery-popup">
-                                        <img class="img-full" src="~/assets/images/product/large-size/2-2-555x645.jpg" alt="Product Image">
+                                        <img class="img-full" src="~/images/sanpham/@Model.Hinh">
                                     </a>
                                 </div>
                                 <div class="swiper-slide">
                                     <a href="~/assets/images/product/large-size/2-3-555x645.jpg" class="single-img gallery-popup">
-                                        <img class="img-full" src="~/assets/images/product/large-size/2-3-555x645.jpg" alt="Product Image">
+                                        <img class="img-full" src="~/images/sanpham/@Model.Hinh">
                                     </a>
                                 </div>
                                 <div class="swiper-slide">
                                     <a href="~/assets/images/product/large-size/2-4-555x645.jpg" class="single-img gallery-popup">
-                                        <img class="img-full" src="~/assets/images/product/large-size/2-4-555x645.jpg" alt="Product Image">
+                                        <img class="img-full" src="~/images/sanpham/@Model.Hinh">
                                     </a>
                                 </div>
                             </div>
@@ -65,31 +65,18 @@
                                 <div class="price-box pb-1">
                                     <span class="new-price text-danger">@Model.Gia.Value.ToString("#,##0") VNĐ</span>
                                 </div>
-                                <div class="rating-box-wrap pb-7">
-                                    <div class="rating-box">
-                                        <ul>
-                                            <li><i class="pe-7s-star"></i></li>
-                                            <li><i class="pe-7s-star"></i></li>
-                                            <li><i class="pe-7s-star"></i></li>
-                                            <li><i class="pe-7s-star"></i></li>
-                                            <li><i class="pe-7s-star"></i></li>
-                                        </ul>
-                                    </div>
-                                    <div class="review-status ps-4">
-                                        <a href="javascript:void(0)">( 1 Customer Review )</a>
-                                    </div>
-                                </div>
                                 <p class="short-desc mb-6">
                                     @Model.MoTa
                                 </p>
                                 <ul class="quantity-with-btn pb-7">
                                     <li class="quantity">
                                         <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" value="1" type="text">
+                                            <input id="txtsoLuong" name="txtsoLuong" class="cart-plus-minus-box" value="1" type="text">
                                         </div>
                                     </li>
                                     <li class="add-to-cart">
-                                        <a class="btn btn-custom-size lg-size btn-primary btn-secondary-hover rounded-0" href="cart.html">Add to cart</a>
+                                        <a class="btn btn-custom-size lg-size btn-primary btn-secondary-hover rounded-0" href="javascript:void(0)">Thêm vào giỏ hàng</a>
+                                        <input hidden asp-for="MaSp" />
                                     </li>
                                 </ul>
                                 <div class="product-category text-matterhorn pb-2">
@@ -106,16 +93,16 @@
                             <div class="swiper-container single-product-thumbs">
                                 <div class="swiper-wrapper">
                                     <a href="javascript:void(0)" class="swiper-slide">
-                                        <img class="img-full" src="~/assets/images/product/large-size/2-1-555x645.jpg" alt="Product Thumnail">
+                                        <img class="img-full" src="~/images/sanpham/@Model.Hinh">
                                     </a>
                                     <a href="javascript:void(0)" class="swiper-slide">
-                                        <img class="img-full" src="~/assets/images/product/large-size/2-2-555x645.jpg" alt="Product Thumnail">
+                                        <img class="img-full" src="~/images/sanpham/@Model.Hinh">
                                     </a>
                                     <a href="javascript:void(0)" class="swiper-slide">
-                                        <img class="img-full" src="~/assets/images/product/large-size/2-3-555x645.jpg" alt="Product Thumnail">
+                                        <img class="img-full" src="~/images/sanpham/@Model.Hinh">
                                     </a>
                                     <a href="javascript:void(0)" class="swiper-slide">
-                                        <img class="img-full" src="~/assets/images/product/large-size/2-4-555x645.jpg" alt="Product Thumnail">
+                                        <img class="img-full" src="~/images/sanpham/@Model.Hinh">
                                     </a>
                                 </div>
                             </div>
@@ -140,7 +127,7 @@
                                 {
                                     foreach (var item in lssp)
                                     {
-                                        string url = "";
+                                        string url = $"/{item.TenSp}-{item.MaSp}.html";
                                         <div class="swiper-slide">
                                             <div class="product-item">
                                                 <div class="product-img img-zoom-effect">
@@ -203,14 +190,14 @@
         $(document).ready(function () {
             $(function () {
                 $(".add-to-cart").click(function () {
-                    var productid = $('#ProductId').val();
+                    var productid = $('#MaSp').val();
                     var soLuong = $('#txtsoLuong').val();
                     $.ajax({
                         url: '/api/cart/add',
                         type: "POST",
                         dataType: "JSON",
                         data: {
-                            productID: productid,
+                            maSp: productid,
                             amount: soLuong
                         },
                         success: function (response) {

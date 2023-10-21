@@ -30,14 +30,14 @@ namespace Web.Controllers
         }
         [HttpPost]
         [Route("api/cart/add")]
-        public IActionResult AddToCart(int MaSp, int? amount)
+        public IActionResult AddToCart(int maSp, int? amount)
         {
             List<CartItem> cart = GioHang;
 
             try
             {
                 //Them san pham vao gio hang
-                CartItem item = cart.SingleOrDefault(p => p.sanpham.MaSp == MaSp);
+                CartItem item = cart.SingleOrDefault(p => p.sanpham.MaSp == maSp);
                 if (item != null) // da co => cap nhat so luong
                 {
                     item.amount = item.amount + amount.Value;
@@ -46,7 +46,7 @@ namespace Web.Controllers
                 }
                 else
                 {
-                    SanPham hh = _context.SanPhams.SingleOrDefault(p => p.MaSp == MaSp);
+                    SanPham hh = _context.SanPhams.SingleOrDefault(p => p.MaSp == maSp);
                     item = new CartItem
                     {
                         amount = amount.HasValue ? amount.Value : 1,
@@ -66,14 +66,39 @@ namespace Web.Controllers
             }
         }
         [HttpPost]
+        [Route("api/cart/update")]
+        public IActionResult UpdateCart(int maSp, int? amount)
+        {
+            //Lay gio hang ra de xu ly
+            var cart = HttpContext.Session.Get<List<CartItem>>("GioHang");
+            try
+            {
+                if (cart != null)
+                {
+                    CartItem item = cart.SingleOrDefault(p => p.sanpham.MaSp == maSp);
+                    if (item != null && amount.HasValue) // da co -> cap nhat so luong
+                    {
+                        item.amount = amount.Value;
+                    }
+                    //Luu lai session
+                    HttpContext.Session.Set<List<CartItem>>("GioHang", cart);
+                }
+                return Json(new { success = true });
+            }
+            catch
+            {
+                return Json(new { success = false });
+            }
+        }
+        [HttpPost]
         [Route("api/cart/remove")]
-        public ActionResult Remove(int MaSp)
+        public ActionResult Remove(int maSp)
         {
 
             try
             {
                 List<CartItem> gioHang = GioHang;
-                CartItem item = gioHang.SingleOrDefault(p => p.sanpham.MaSp == MaSp);
+                CartItem item = gioHang.SingleOrDefault(p => p.sanpham.MaSp == maSp);
                 if (item != null)
                 {
                     gioHang.Remove(item);

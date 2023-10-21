@@ -1,26 +1,9 @@
 ﻿@model List<Web.ModelViews.CartItem>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Xem giỏ hàng";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <main class="main-content">
-    <div class="breadcrumb-area breadcrumb-height" data-bg-image="assets/images/breadcrumb/bg/1-1-1920x373.jpg">
-        <div class="container h-100">
-            <div class="row h-100">
-                <div class="col-lg-12">
-                    <div class="breadcrumb-item">
-                        <h2 class="breadcrumb-heading">Product Related</h2>
-                        <ul>
-                            <li>
-                                <a href="/">Trang chủ <i class="pe-7s-angle-right"></i></a>
-                            </li>
-                            <li>Giỏ Hàng</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="cart-area section-space-y-axis-100">
         <div class="container">
             <div class="row">
@@ -47,9 +30,7 @@
                                             {
                                                 <tr>
                                                     <td class="product_remove">
-                                                        <a href="javascript:void(0)">
-                                                            <i class="pe-7s-close" title="Remove"></i>
-                                                        </a>
+                                                        <input type="button" value="X" class="removecart btn btn-primary" data-mahh="@item.sanpham.MaSp" />
                                                     </td>
                                                     <td class="product-thumbnail">
                                                         <a href="javascript:void(0)">
@@ -60,10 +41,10 @@
                                                     <td class="product-price"><span class="amount">@item.sanpham.Gia.Value.ToString("#,##0") VNĐ</span></td>
                                                     <td class="quantity">
                                                         <div class="cart-plus-minus">
-                                                            <input class="cart-plus-minus-box" value="@item.amount" type="text">
+                                                            <input data-mahh="@item.sanpham.MaSp" data-dongia="@item.sanpham.Gia" class="cartItem cart-plus-minus-box" value="@item.amount" min="1" type="number">
                                                         </div>
                                                     </td>
-                                                    <td class="product-subtotal"><span class="amount">@item.TotalMoney.ToString("#,##0") VNĐ</span></td>
+                                                    <td class="product-subtotal"><span class="amount">@item.TotalMoney.Value.ToString("#,##0") VNĐ</span></td>
                                                 </tr>
                                             }
                                         }
@@ -71,26 +52,20 @@
                                 </table>
                             </div>
                             <div class="row">
-                                <div class="col-12">
-                                    <div class="coupon-all">
-                                        <div class="coupon">
-                                            <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Coupon code" type="text">
-                                            <input class="button mt-xxs-30" name="apply_coupon" value="Apply coupon" type="submit">
-                                        </div>
-                                        <div class="coupon2">
-                                            <input class="button" name="update_cart" value="Update cart" type="submit">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-5 ml-auto">
                                     <div class="cart-page-total">
                                         <h2>Tổng</h2>
                                         <ul>
-                                            <li>Thành tiền <span>@Model.Sum(x=>x.TotalMoney).ToString("#,##0") VNĐ</span></li>
+                                            <li>Thành tiền <span>@Model.Sum(x=>x.TotalMoney).Value.ToString("#,##0") VNĐ</span></li>
                                         </ul>
-                                        <a href="javascript:void(0)">Thanh Toán</a>
+                                        @if (User.Identity.IsAuthenticated)
+                                        {
+                                            <a href="/checkout.html" class="btn btn-secondary btn-primary-hover">Thanh toán</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/dang-nhap.html?returnUrl=/checkout.html" class="btn btn-secondary btn-primary-hover">Thanh toán</a>
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -105,3 +80,53 @@
         </div>
     </div>
 </main>
+@section Scripts{
+    <script>
+        $(function () {
+            function loadHeaderCart() {
+                $('#miniCart').load("/AjaxContent/HeaderCart");
+                $('#numberCart').load("/AjaxContent/NumberCart");
+            }
+            $(".removecart").click(function () {
+                var productid = $(this).attr("data-mahh");
+                $.ajax({
+                    url: "api/cart/remove",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: { maSp: productid },
+                    success: function (result) {
+                        if (result.success) {
+                            loadHeaderCart();//Reload lai gio hang
+                            location.reload();
+                        }
+                    },
+                    error: function (rs) {
+                        alert("Remove Cart Error !")
+                    }
+                });
+            });
+            $(".cartItem").click(function () {
+                var productid = $(this).attr("data-mahh");
+                var soluong = parseInt($(this).val());
+                $.ajax({
+                    url: "api/cart/update",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: {
+                        maSp: productid,
+                        amount: soluong
+                    },
+                    success: function (result) {
+                        if (result.success) {
+                            loadHeaderCart();//Reload lai gio hang
+                            window.location = 'cart.html';
+                        }
+                    },
+                    error: function (rs) {
+                        alert("Cập nhật Cart Error !")
+                    }
+                });
+            });
+        });
+    </script>
+}

@@ -11,7 +11,7 @@ public partial class SanPham
 
     public int? SoLuong { get; set; }
 
-    public int? Gia { get; set; }
+    public decimal? Gia { get; set; }
 
     public string? Hinh { get; set; }
 
