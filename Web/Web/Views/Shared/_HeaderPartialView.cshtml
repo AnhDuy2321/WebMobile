@@ -41,12 +41,11 @@
                         </a>
                         <div class="header-search-area d-none d-lg-block">
                             <form action="#" class="header-searchbox">
-                                <select class="nice-select select-search-category wide">
-                                    <option value="all">All Category</option>
-                                    <option value="product-item">Product Item</option>
-                                </select>
-                                <input class="input-field" type="text" placeholder="Tìm kiếm sản phẩm">
-                                <button class="btn btn-outline-whisper btn-primary-hover" type="submit"><i class="pe-7s-search"></i></button>
+                                <form class="header-searchbox">
+                                    <input id="searchString" name="searchString" class="input-field" type="text" placeholder="Tìm kiếm sản phẩm">
+                                    <button class="btn btn-outline-whisper btn-primary-hover" type="submit"><i class="pe-7s-search"></i></button>
+                                </form>
+                                <div id="records_table" class="results-box"></div>
                             </form>
                         </div>
                         <div class="header-right">

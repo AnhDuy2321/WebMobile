@@ -13,7 +13,7 @@ namespace Web.Extension
 
         public static string GetRoleID(this IIdentity identity)
         {
-            var claim = ((ClaimsIdentity)identity).FindFirst("MaLoai");
+            var claim = ((ClaimsIdentity)identity).FindFirst("MaVaiTro");
             return (claim != null) ? claim.Value : string.Empty;
         }
         public static string GetUserName(this IIdentity identity)

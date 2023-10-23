@@ -185,6 +185,7 @@ public partial class DbDiDongContext : DbContext
 
             entity.HasOne(d => d.MaVaiTroNavigation).WithMany(p => p.TaiKhoans)
                 .HasForeignKey(d => d.MaVaiTro)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_TaiKhoan_VaiTro");
         });
 

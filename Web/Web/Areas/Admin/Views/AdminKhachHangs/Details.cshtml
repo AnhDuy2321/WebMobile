@@ -5,44 +5,43 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Details</h1>
+<h1>Xem chi tiết</h1>
 
 <div>
-    <h4>KhachHang</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TenKh)
+            <label>Tên khách hàng:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.TenKh)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DiaChi)
+            <label>Địa chỉ:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.DiaChi)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Sdt)
+            <label>Số điện thoại:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Sdt)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NgaySinh)
+            <label>Ngày sinh:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.NgaySinh)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TaiKhoan)
+            <label>Tài khoản:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.TaiKhoan)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MatKhau)
+            <label>Mật khẩu:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.MatKhau)
@@ -54,12 +53,6 @@
             @Html.DisplayFor(model => model.Salt)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TrangThai)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TrangThai)
-        </dd>
-        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Email)
         </dt>
         <dd class = "col-sm-10">
@@ -68,6 +61,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.MaKh">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.MaKh">Sửa</a> |
+    <a asp-action="Index">Quay trở lại</a>
 </div>

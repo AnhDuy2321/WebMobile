@@ -14,23 +14,67 @@ namespace Web.Controllers
             _context = context;
         }
         [Route("shop.html", Name = ("ShopProduct"))]
-        public IActionResult Index(int? page)
+        public IActionResult Index(string searchString, int? page)
         {
-            try
+            if(searchString != null)
             {
-                var pageNumber = page == null || page <= 0 ? 1 : page.Value;
-                var pageSize = 6;
-                var lsSanPhams = _context.SanPhams.AsNoTracking()
-                    .OrderByDescending(x => x.MaSp);
-                PagedList<SanPham> models = new PagedList<SanPham>(lsSanPhams, pageNumber, pageSize);
-                ViewBag.CurrentPage = pageNumber;
-                return View(models);
+                try
+                {
+                    var pageNumber = page == null || page <= 0 ? 1 : page.Value;
+                    var pageSize = 6;
+                    var lsSanPhams = _context.SanPhams.AsNoTracking();
+
+                    if (!string.IsNullOrEmpty(searchString))
+                    {
+                        lsSanPhams = lsSanPhams.Where(x => x.TenSp.Contains(searchString));
+                    }
+
+                    lsSanPhams = lsSanPhams.OrderByDescending(x => x.MaSp);
+                    PagedList<SanPham> models = new PagedList<SanPham>(lsSanPhams, pageNumber, pageSize);
+                    ViewBag.CurrentPage = pageNumber;
+                    return View(models);
+                }
+                catch
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
-            catch
+            else
             {
-                return RedirectToAction("Index", "Home");
+                try
+                {
+                    var pageNumber = page == null || page <= 0 ? 1 : page.Value;
+                    var pageSize = 6;
+                    var lsSanPhams = _context.SanPhams.AsNoTracking()
+                        .OrderByDescending(x => x.MaSp);
+                    PagedList<SanPham> models = new PagedList<SanPham>(lsSanPhams, pageNumber, pageSize);
+                    ViewBag.CurrentPage = pageNumber;
+                    return View(models);
+                }
+                catch
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
+            
         }
+        //public IActionResult Index(int? page)
+        //{
+        //    try
+        //    {
+        //        var pageNumber = page == null || page <= 0 ? 1 : page.Value;
+        //        var pageSize = 6;
+        //        var lsSanPhams = _context.SanPhams.AsNoTracking()
+        //            .OrderByDescending(x => x.MaSp);
+        //        PagedList<SanPham> models = new PagedList<SanPham>(lsSanPhams, pageNumber, pageSize);
+        //        ViewBag.CurrentPage = pageNumber;
+        //        return View(models);
+        //    }
+        //    catch
+        //    {
+        //        return RedirectToAction("Index", "Home");
+        //    }
+        //}
         //[Route("ProductList")]
         [Route("danhmuc/{TenLoai}", Name = ("ListProduct"))]
         public IActionResult List(string TenLoai, int page=1)

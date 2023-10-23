@@ -13,9 +13,9 @@ public partial class TaiKhoan
 
     public string? MatKhau { get; set; }
 
-    public int? MaVaiTro { get; set; }
+    public int MaVaiTro { get; set; }
 
     public string? Salt { get; set; }
 
-    public virtual VaiTro? MaVaiTroNavigation { get; set; }
+    public virtual VaiTro MaVaiTroNavigation { get; set; } = null!;
 }
